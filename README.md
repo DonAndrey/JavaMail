@@ -1,6 +1,5 @@
 # JavaMail 
-## Este es un programa hecho con el lenguaje de programación Java y utilizando el API  JavaMail.
-<br />
+
 ### Objetivo:
 Automatizar el envío de correos a grupos de recipientes. 
 
