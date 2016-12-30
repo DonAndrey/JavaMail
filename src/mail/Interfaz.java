@@ -3,6 +3,7 @@
  */
 package mail;
 
+import DB.DBConnection;
 import javax.swing.JDialog;
 import java.util.Properties;
 import javax.mail.Message;
@@ -13,6 +14,7 @@ import javax.mail.internet.AddressException;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 import javax.swing.JOptionPane;
+import java.sql.ResultSet;
 
 /**
  *
@@ -22,16 +24,73 @@ public class Interfaz extends javax.swing.JFrame {
 
     private static String USER_NAME = "";  // GMail user name (just the part before "@gmail.com")
     private static String PASSWORD = ""; // GMail password
+    private static String HOST = "";
     private static String RECIPIENT = "robinperez38@gmail.com";
     private static String subject;
     private static String message;
+    private DBConnection db;
+    private ResultSet rs;
+    
     /**
      * Creates new form Interfaz
      */
     public Interfaz() {
         initComponents();
+        
+        db = new DBConnection();
+        
+        if(!setSMPTServer())
+        {
+            System.out.println("No se pudo setear el servidor smtp");
+        }
+        else
+        {
+            System.out.println(USER_NAME);
+        }
+        
     }
 
+    private boolean setSMPTServer()
+    {
+        boolean success = false;
+        ResultSet rs = null;
+        
+        int id = db.isEmpty("SMTPServer");
+        
+        if(id >= 0)
+        {
+            String query = "SELECT * from SMTPServer";
+            rs = db.select(query);
+            if(rs != null)
+            {
+                try
+                {
+                    while(rs.next())
+                    {
+                        USER_NAME = rs.getString("USER");
+                        PASSWORD = rs.getString("PASSWORD");
+                        HOST = rs.getString("SERVER");
+                        
+                    }
+                    
+                    success = true;
+                }
+                catch(Exception e)
+                {
+                    System.err.println("Class: "+e.getClass()+" Message: "+e.getMessage()); 
+                }
+
+            }
+            
+        }
+        else
+        {
+            //mensaje de error
+        }
+        
+        return success;
+    }
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
