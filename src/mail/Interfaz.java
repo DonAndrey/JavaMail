@@ -25,6 +25,7 @@ public class Interfaz extends javax.swing.JFrame {
     private static String USER_NAME = "";  // GMail user name (just the part before "@gmail.com")
     private static String PASSWORD = ""; // GMail password
     private static String HOST = "";
+    private static String PORT = "";
     private static String RECIPIENT = "robinperez38@gmail.com";
     private static String subject;
     private static String message;
@@ -41,7 +42,7 @@ public class Interfaz extends javax.swing.JFrame {
         
         if(!setSMPTServer())
         {
-            System.out.println("No se pudo setear el servidor smtp");
+            System.out.println("No se pudo configurar el servidor smtp");
         }
         else
         {
@@ -70,6 +71,7 @@ public class Interfaz extends javax.swing.JFrame {
                         USER_NAME = rs.getString("USER");
                         PASSWORD = rs.getString("PASSWORD");
                         HOST = rs.getString("SERVER");
+                        PORT = rs.getString("PORT");
                         
                     }
                     
@@ -226,7 +228,7 @@ public class Interfaz extends javax.swing.JFrame {
 
        if(setSubject(this.textField1.getText()) && setMessage(this.jTextArea1.getText()))
        {
-           setEmail();
+           sendEmail();
        }
     }//GEN-LAST:event_button1ActionPerformed
 
@@ -272,26 +274,22 @@ public class Interfaz extends javax.swing.JFrame {
         return success;
     }
     
-    private boolean setEmail()    
-    {
+
+    
+    
+    private  void sendEmail() {
+        String[] to = { RECIPIENT }; // list of recipient email addresses
         String from = USER_NAME;
         String pass = PASSWORD;
-        String[] to = { RECIPIENT }; // list of recipient email addresses
-
-        sendFromUCR(from, pass, to);
+        String host = HOST;
+        String port = PORT;
         
-        return false;
-    }
-    
-    
-    private  void sendFromUCR(String from, String pass, String[] to) {
         Properties props = System.getProperties();
-        String host = "smtp.ucr.ac.cr";
         props.put("mail.smtp.starttls.enable", "true");
         props.put("mail.smtp.host", host);
         props.put("mail.smtp.user", from);
         props.put("mail.smtp.password", pass);
-        props.put("mail.smtp.port", "587");
+        props.put("mail.smtp.port", port);
         props.put("mail.smtp.auth", "true");
 
         Session session = Session.getDefaultInstance(props);
