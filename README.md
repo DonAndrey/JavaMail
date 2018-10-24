@@ -1,16 +1,15 @@
 # JavaMail 
 
-### Objetivo:
-Automatizar el envío de correos a grupos de recipientes. 
+### Main Goal:
+Make a desktop application that can send mails to a big group of people. 
 
-### Descripción: 
-Este es un programa implementado en Java. Cuenta con una interfaz de usuario que en primera instancia, permite: <br>
+### Description: 
+This a desktop application use java as a programming language. It has a user interface that allows the user to: <br>
 <ol>
-  <li>Agregar un asunto</li>
-  <li>Escribir un mensaje</li>
-  <li>Agregar un usuario nuevo al grupo</li>
+  <li>Add a subject</li>
+  <li>Write a message</li>
+  <li>Add users to a specific group</li>
 </ol>
 
-La idea es que este programa automatice el envío de correos electrónicos a grupos de usuarios. <br>
-Actualmente las plataformas de correo electrónico como Gmail, Hotmail, etc... Permiten hacer esto de manera muy sencilla <br>
-sin embargo en plataformas de correos poco usuales, la configuración de esta funcionalidad puede ser muy difícil, llevando al usuario a la resignación y simplemente obligándolo a hacer esta tarea manualmente. 
+Currently e-mails platforms like Gmail, Hotmail and so on, allows the function described before in a really easy way, but there are some platforms that are less commons and generally used by goverments institutions that could be harder to use, making the users to feel unconfortable, so this applications pretends to be a solution for that problem.
+
